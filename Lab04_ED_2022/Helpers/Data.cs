@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Lab04_ED_2022.Estructura_de_Datos;
+using Lab04_ED_2022.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,5 +21,10 @@ namespace Lab04_ED_2022.Helpers
                 return _instance;
             }
         }
+
+        public Heap<ModeloPaciente> miHeap = new Heap<ModeloPaciente>
+        {
+            compPrioridad = Delegados.Delegados.setPrioridad
+        };
     }
 }
