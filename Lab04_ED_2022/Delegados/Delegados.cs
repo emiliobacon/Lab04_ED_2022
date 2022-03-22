@@ -7,76 +7,73 @@ namespace Lab04_ED_2022.Delegados
 
     public class Delegados
     {
-        public static int setPrioridad(ModeloPaciente paciente)
+        public static void setPrioridad(ModeloPaciente paciente)
         {
-            int prioridad = 0;
-
-            //          suma prioridad de acuerdo al genero
+//          suma prioridad de acuerdo al genero
             if (paciente.Genero == false)
             {
-                //              hombre                
-                prioridad += 3;
+//              hombre                
+                paciente.Prioridad += 3;
             }
             else
-                //              mujer                
-                prioridad += 5;
+//              mujer                
+                paciente.Prioridad += 5;
 
             if (paciente.Ingreso == false)
             {
-                //              ingreso ambulancia                 
-                prioridad += 5;
+//              ingreso ambulancia                 
+                paciente.Prioridad += 5;
             }
             else
-                //              ingreso asistido
-                prioridad += 3;
+//              ingreso asistido
+                paciente.Prioridad += 3;
 
-            //          suma prioridad de acuerdo a la edad 
+//          suma prioridad de acuerdo a la edad 
             switch (prioridadEdad(paciente))
             {
                 case 1:
-                    prioridad += 8;
+                    paciente.Prioridad += 8;
                     break;
 
                 case 2:
-                    prioridad += 5;
+                    paciente.Prioridad += 5;
                     break;
 
                 case 3:
-                    prioridad += 3;
+                    paciente.Prioridad += 3;
                     break;
 
                 case 4:
-                    prioridad += 8;
+                    paciente.Prioridad += 8;
                     break;
 
                 case 5:
-                    prioridad += 10;
+                    paciente.Prioridad += 10;
                     break;
             }
-            //          suma prioridad de acuerdo a la especializacion
+//          suma prioridad de acuerdo a la especializacion
             switch (prioridadEspecializacion(paciente))
             {
                 case 1:
-                    prioridad += 3;
+                    paciente.Prioridad += 3;
                     break;
                 case 2:
-                    prioridad += 5;
+                    paciente.Prioridad += 5;
                     break;
                 case 3:
-                    prioridad += 8;
+                    paciente.Prioridad += 8;
                     break;
                 case 4:
-                    prioridad += 8;
+                    paciente.Prioridad += 8;
                     break;
                 case 5:
-                    prioridad += 10;
+                    paciente.Prioridad += 10;
                     break;
                 case 6:
-                    prioridad += 0;
+                    paciente.Prioridad += 0;
                     break;
             }
-            //          regresa el valor que sera asignado como prioridad
-            return prioridad;
+
         }
 
         //70  +: +10 (5)
@@ -143,7 +140,19 @@ namespace Lab04_ED_2022.Delegados
             }
         }
 
-        
+        public static void excepcionHora(ModeloPaciente a, ModeloPaciente b)
+        {
+            if (a.Hora > b.Hora)
+            {
+                b.Prioridad += 1;
+            }
+            else
+            {
+                a.Prioridad += 1;
+            }
+        }
+
+
 
     }
 }

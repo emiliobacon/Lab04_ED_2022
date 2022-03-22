@@ -17,6 +17,12 @@ namespace Lab04_ED_2022.Models
 //      falso ambulancia verdadero asistido
         [Required]
         public bool Ingreso { get; set; }
+
+        public int Prioridad { get; set; }
+
+//      hora: 0000, 0010, 1400, 1350,
+        [Required]
+        public int Hora { get; set; }
    
     }
 }
