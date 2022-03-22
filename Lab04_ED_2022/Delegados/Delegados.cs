@@ -3,6 +3,7 @@
 namespace Lab04_ED_2022.Delegados
 {
     public delegate int Prioridad<T>(T a);
+    public delegate int Comparar<T>(T a, T b);
 
     public class Delegados
     {
@@ -142,6 +143,7 @@ namespace Lab04_ED_2022.Delegados
             }
         }
 
+        
 
     }
 }
