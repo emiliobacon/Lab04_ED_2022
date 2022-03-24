@@ -1,4 +1,5 @@
-﻿using Lab04_ED_2022.Models;
+﻿using System;
+using Lab04_ED_2022.Models;
 
 namespace Lab04_ED_2022.Delegados
 {
@@ -9,26 +10,26 @@ namespace Lab04_ED_2022.Delegados
     {
         public static void setPrioridad(ModeloPaciente paciente)
         {
-//          suma prioridad de acuerdo al genero
+            //          suma prioridad de acuerdo al genero
             if (paciente.Genero == false)
             {
-//              hombre                
+                //              hombre                
                 paciente.Prioridad += 3;
             }
             else
-//              mujer                
+                //              mujer                
                 paciente.Prioridad += 5;
 
             if (paciente.Ingreso == false)
             {
-//              ingreso ambulancia                 
+                //              ingreso ambulancia                 
                 paciente.Prioridad += 5;
             }
             else
-//              ingreso asistido
+                //              ingreso asistido
                 paciente.Prioridad += 3;
 
-//          suma prioridad de acuerdo a la edad 
+            //          suma prioridad de acuerdo a la edad 
             switch (prioridadEdad(paciente))
             {
                 case 1:
@@ -51,7 +52,7 @@ namespace Lab04_ED_2022.Delegados
                     paciente.Prioridad += 10;
                     break;
             }
-//          suma prioridad de acuerdo a la especializacion
+            //          suma prioridad de acuerdo a la especializacion
             switch (prioridadEspecializacion(paciente))
             {
                 case 1:
@@ -151,8 +152,5 @@ namespace Lab04_ED_2022.Delegados
                 a.Prioridad += 1;
             }
         }
-
-
-
     }
 }

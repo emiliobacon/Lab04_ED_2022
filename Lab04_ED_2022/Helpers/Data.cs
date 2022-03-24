@@ -24,7 +24,7 @@ namespace Lab04_ED_2022.Helpers
 
         public Heap<ModeloPaciente> miHeap = new Heap<ModeloPaciente>
         {
-            compPrioridad = Delegados.Delegados.setPrioridad
+            
         };
     }
 }

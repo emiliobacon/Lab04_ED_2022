@@ -14,11 +14,13 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         public Nodo<T> Derecha;
         public Nodo<T> Padre;
 
-//      constructor de pioridad para el nodo
+        //      constructor de pioridad para el nodo
         public Nodo(int prioridad)
         {
             this.Prioridad = prioridad;
         }
+
+
 
         public Nodo(T data)
         {
@@ -26,3 +28,4 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         }
     }
 }
+
