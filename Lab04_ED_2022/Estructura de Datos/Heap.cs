@@ -8,7 +8,10 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 {
     public class Heap<T>
     {
+        private int count;
+
         public Prioridad<T> compPrioridad { get; set; }
+
 
         Nodo<T> raiz;
         public Heap()
@@ -25,40 +28,51 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
         public void Insertar(T data)
         {
-            Nodo<T> nuevoNodo = new Nodo<T>(data);
-            Insertar(nuevoNodo, raiz);
-        }
-
-        private void Insertar(Nodo<T> nuevo, Nodo<T> padre)
-        {
-            
-            if (padre == null)
+            if (raiz == null)
             {
-                padre = nuevo;
+                Nodo<T> nuevoNodo = new TreeNode<K, V>(getPriority(value), value);
+                raiz = nuevoNodo;
+                count++;
             }
             else
+            {
+
+            }
+        }
+
+
+
+        public int Count()
+        {
+            return count;
+        }
+
+        private void insertarInterno(Nodo<T> padre,Nodo<T> nuevo,  int nivel)
+        {
+            int maximoNivel = 0;
+            for (int i = 0; i < nivel; i++)
+            {
+                maximoNivel += Convert.ToInt32(Math.Pow(2, i));
+            }
+            if (Count() < maximoNivel)
             {
                 if (padre.Izquierda == null)
                 {
                     padre.Izquierda = nuevo;
-                    
-                }
-                else if (padre.Derecha == null)
-                {
-                    padre.Derecha = nuevo;
                 }
                 else
                 {
-                    Insertar(nuevo, padre.Izquierda);
+                    padre.Derecha = nuevo;
                 }
+                count++;
 
-                
+                //heapify
+
             }
-        }
-
-        public void Heapify(Nodo<T> raiz)
-        { 
-
+            else
+            {
+                insertarInterno(padre.Derecha, nuevo, nivel + 1);
+            }
         }
 
     }
