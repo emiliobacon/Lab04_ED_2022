@@ -9,7 +9,7 @@ namespace Lab04_ED_2022.Delegados
     public class Delegados
     {
 
-        public static int Heapify(ModeloPaciente a, ModeloPaciente b) //arreglar mayúscula
+        public static int HeapifyDelegate(ModeloPaciente a, ModeloPaciente b) //arreglar mayúscula
         {
             return a.Prioridad > b.Prioridad ? 1 : -1;
         }

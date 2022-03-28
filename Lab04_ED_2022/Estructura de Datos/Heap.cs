@@ -9,7 +9,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
     public class Heap<T> : IEnumerable<T>, IEnumerable
     {
         public Prioridad<T> compPrioridad { get; set; }
-        public Comparar<T> Heapify { get; set; }
+        public Comparar<T> HeapifyDelegate { get; set; }
 
         int count = 0;
         int profundidad = 0;
@@ -70,15 +70,9 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                     padre.Izquierda = newNode;
                     newNode.Padre = padre;
 
-                    if (Heapify(newNode.Data, newNode.Padre.Data) == 1) //intercambiar valores //aux nodo = hijo, hijo izq , derecho es padre, padre es padre de padre, izq de mi padre 
-                    {
-                        padre.Padre = newNode;
-                        padre.Izquierda = null;
-                        
-                        newNode.Padre = null;
-                        newNode.Izquierda = padre;
-                        
-                    }
+                    //heapify
+
+                    Heapify(newNode);
                 }
                 else
                 {
@@ -86,19 +80,15 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                     padre.Derecha = newNode;
                     newNode.Padre = padre;
 
-                    //if (Heapify(newNode.Data, newNode.Padre.Data) == 1)
-                    //{
-                    //    newNode.Padre.Padre = newNode;
-                    //    newNode.Derecha = newNode.Padre;
-                    //    newNode.Padre = null;
-                    //}
+                    //heapify
+
+                    Heapify(newNode);
+
                 }
                 count++;
-               
             }
             else
             {
-
                 Nodo<T> raizActual = new Nodo<T>(padre.Data);
 
                 if (padre.Izquierda.Izquierda == null || padre.Izquierda.Derecha == null)
@@ -131,14 +121,48 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                 }
 
                 insertInternal(raizActual, newNode, level + 1);
+            }
+        }
+        //clonar raiz para mostrar arbol 
+        //actualizado 
 
+        private void Heapify(Nodo<T> actual)
+        {
+            //nodo para almacenar temporalmente los datos 
+            Nodo<T> tray = new Nodo<T>(actual.Data);
 
+            //siempre y cuando no estemos en la raiz 
+            while (actual.Padre != null)
+            {
+
+                //si la prioridad del hijo es mayor a la del padre 
+                //hacer un swap de prioridad
+                if (HeapifyDelegate(actual.Data,actual.Padre.Data) == 1)
+                {
+
+                    //swap de prioridad usando la bandeja 
+                    //para almacenar datos temporalmente
+                    tray.Data = actual.Data;
+                   
+                    actual.Data = actual.Padre.Data;
+                    
+                    actual.Padre.Data = tray.Data;
+                    
+                    //avanzar al padre del padre
+                    Heapify(actual.Padre);
+                }
+                else
+                {
+                    //si la prioridad no es mayor 
+                    //avanzar al padre del padre
+                    Heapify(actual.Padre);
+                }
+                
             }
 
-        }
-     //clonar raiz para mostrar arbol 
-     //actualizado 
+            return;
 
+        }
 
         private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
         {
