@@ -20,7 +20,7 @@ namespace Lab04_ED_2022.Controllers
         // GET: ControladorPaciente
         public ActionResult Index()
         {
-            return View();
+            return View(Data.Instance.miHeap);
         }
 
         // GET: ControladorPaciente/Details/5
@@ -46,10 +46,10 @@ namespace Lab04_ED_2022.Controllers
                 {
                     Nombres = collection["Nombres"],
                     Apellidos = collection["Apellidos"],
-                    Genero = bool.Parse(collection["Genero"]),
+                    Genero = collection["Genero"],
                     Edad = int.Parse(collection["Edad"]),
                     Especializacion = collection["Especializacion"],
-                    Ingreso = bool.Parse(collection["Ingreso"]),
+                    Ingreso = collection["Ingreso"],
                     Prioridad = int.Parse(collection["Prioridad"]),
                     Hora = int.Parse(collection["Hora"]),
                     FechaDeNacimiento = DateTime.Parse(collection["FechaDeNacimiento"]),

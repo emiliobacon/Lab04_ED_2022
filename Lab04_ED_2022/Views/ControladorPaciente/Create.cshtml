@@ -4,18 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Ingresar un nuevo paciente</h1>
-<p>
-    <b>Cargar  desde CSV</b>
-</p>
-<form asp-controller="ControladorPaciente" asp-action="Upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" />
-    <br />
-    <br />
-    <button type="submit">Cargar</button>
-    <hr />
-</form>
+<h1>Create</h1>
 
+<h4>ModeloPaciente</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -31,37 +22,30 @@
                 <input asp-for="Apellidos" class="form-control" />
                 <span asp-validation-for="Apellidos" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Genero" /> @Html.DisplayNameFor(model => model.Genero)
-                </label>
+            <div class="form-group">
+                <label asp-for="Genero" class="control-label"></label>
+                <input asp-for="Genero" class="form-control" />
+                <span asp-validation-for="Genero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Edad" class="control-label"></label>
+                <input asp-for="Edad" class="form-control" />
+                <span asp-validation-for="Edad" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Especializacion" class="control-label"></label>
-                <select class=" form-select" asp-for=" Especializacion">
-                    <option>
-                        Traumatología [interna]
-                    </option>
-                    <option>
-                        Traomatología [Expuesta]
-                    </option>
-                    <option>
-                        Ginecología
-                    </option>
-                    <option>
-                        Cardiolodía
-                    </option>
-                    <option>
-                        Neumología
-                    </option>
-
-                    <option value="item"> @Html.DisplayFor(model => model.Especializacion) </option>
-                </select>
+                <input asp-for="Especializacion" class="form-control" />
+                <span asp-validation-for="Especializacion" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Ingreso" /> @Html.DisplayNameFor(model => model.Ingreso)
-                </label>
+            <div class="form-group">
+                <label asp-for="Ingreso" class="control-label"></label>
+                <input asp-for="Ingreso" class="form-control" />
+                <span asp-validation-for="Ingreso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prioridad" class="control-label"></label>
+                <input asp-for="Prioridad" class="form-control" />
+                <span asp-validation-for="Prioridad" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Hora" class="control-label"></label>

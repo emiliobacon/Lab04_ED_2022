@@ -14,14 +14,14 @@ namespace Lab04_ED_2022.Models
         public string Apellidos { get; set; }
         //      false hombre verdadero mujer
         [Required]
-        public bool Genero { get; set; }
+        public string Genero { get; set; }
         
         public int Edad { get; set; }
         [Required]
         public string Especializacion { get; set; }
 //      falso ambulancia verdadero asistido
         [Required]
-        public bool Ingreso { get; set; }
+        public string Ingreso { get; set; }
 
         public int Prioridad { get; set; }
 

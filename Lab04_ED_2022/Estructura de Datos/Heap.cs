@@ -1,18 +1,20 @@
-﻿using Lab04_ED_2022.Delegados;
+﻿using Lab03_ED_2022.Estructura_de_Datos;
+using Lab04_ED_2022.Delegados;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Lab04_ED_2022.Estructura_de_Datos
 {
-    public class Heap<T>
+    public class Heap<T> : IEnumerable<T>, IEnumerable
     {
+        public Prioridad<T> compPrioridad { get; set; }
+        public Comparar<T> Heapify { get; set; }
+
         int count = 0;
         int profundidad = 0;
-        public Prioridad<T> compPrioridad { get; set; }
-        Nodo<T> raiz;
 
+        Nodo<T> raiz;
         public Heap()
         {
             this.raiz = null;
@@ -25,14 +27,15 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
         public Nodo<T> asignarPrioridad(Nodo<T> nodo)
         {
-            nodo.Prioridad = compPrioridad(nodo.Data);
+            compPrioridad(nodo.Data);
             return nodo;
         }
-
 
         public void Insertar(T data)
         {
             Nodo<T> nuevoNodo = new Nodo<T>(data);
+            asignarPrioridad(nuevoNodo);
+
 
             if (raiz == null)
             {
@@ -61,23 +64,40 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             }
 
             if (Count() < max_by_level)
-            {  //Pede ser insertado en este nivel
+            {
                 if (padre.Izquierda == null)
                 {
                     padre.Izquierda = newNode;
+                    newNode.Padre = padre;
+
+                    if (Heapify(newNode.Data, newNode.Padre.Data) == 1) //intercambiar valores //aux nodo = hijo, hijo izq , derecho es padre, padre es padre de padre, izq de mi padre 
+                    {
+                        padre.Padre = newNode;
+                        padre.Izquierda = null;
+                        
+                        newNode.Padre = null;
+                        newNode.Izquierda = padre;
+                        
+                    }
                 }
                 else
                 {
+
                     padre.Derecha = newNode;
+                    newNode.Padre = padre;
+
+                    //if (Heapify(newNode.Data, newNode.Padre.Data) == 1)
+                    //{
+                    //    newNode.Padre.Padre = newNode;
+                    //    newNode.Derecha = newNode.Padre;
+                    //    newNode.Padre = null;
+                    //}
                 }
                 count++;
-
-                //@pending: Comaparamos a verificar si es necesario cambiar el contenido del nodo
+               
             }
             else
             {
-                //@pending: Buscar en el siguiente nivel pero enviarle como parametro el padre que puede tenerlo
-
 
                 Nodo<T> raizActual = new Nodo<T>(padre.Data);
 
@@ -116,9 +136,36 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             }
 
         }
-        public void Heapify(Nodo<T> raiz)
+     //clonar raiz para mostrar arbol 
+
+
+        private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
         {
 
+            if (padre != null)
+            {
+                InOrder(padre.Izquierda, ref queue);
+                queue.Encolar(padre.Data);
+                InOrder(padre.Derecha, ref queue);
+            }
+            return;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            var queue = new ColaRecorrido<T>();
+            InOrder(raiz, ref queue);
+
+            while (!queue.ColaVacia())
+            {
+                yield return queue.DesEncolar();
+            }
+
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

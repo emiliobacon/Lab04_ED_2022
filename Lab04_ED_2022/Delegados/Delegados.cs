@@ -3,31 +3,40 @@ using Lab04_ED_2022.Models;
 
 namespace Lab04_ED_2022.Delegados
 {
-    public delegate int Prioridad<T>(T a);
+    public delegate void Prioridad<T>(T a);
     public delegate int Comparar<T>(T a, T b);
 
     public class Delegados
     {
+
+        public static int Heapify(ModeloPaciente a, ModeloPaciente b) //arreglar mayúscula
+        {
+            return a.Prioridad > b.Prioridad ? 1 : -1;
+        }
         public static void setPrioridad(ModeloPaciente paciente)
         {
             //          suma prioridad de acuerdo al genero
-            if (paciente.Genero == false)
+            if (paciente.Genero.CompareTo("hombre") == 0)//radiobutton
             {
                 //              hombre                
                 paciente.Prioridad += 3;
             }
-            else
+            else if (paciente.Genero.CompareTo("mujer") == 0)
+            {
                 //              mujer                
                 paciente.Prioridad += 5;
+            }
 
-            if (paciente.Ingreso == false)
+            if (paciente.Ingreso.CompareTo("ambulancia") == 0)
             {
                 //              ingreso ambulancia                 
                 paciente.Prioridad += 5;
             }
-            else
+            else if (paciente.Ingreso.CompareTo("asistido") == 0)
+            {
                 //              ingreso asistido
                 paciente.Prioridad += 3;
+            }
 
             //          suma prioridad de acuerdo a la edad 
             switch (prioridadEdad(paciente))
@@ -89,22 +98,23 @@ namespace Lab04_ED_2022.Delegados
             {
                 return 1;
             }
-            else if (paciente.Edad >= 6 && paciente.Edad <= 17)
+
+            if (paciente.Edad >= 6 && paciente.Edad <= 17)
             {
                 return 2;
             }
-            else if (paciente.Edad >= 18 && paciente.Edad <= 49)
+
+            if (paciente.Edad >= 18 && paciente.Edad <= 49)
             {
                 return 3;
             }
-            else if (paciente.Edad >= 50 && paciente.Edad <= 69)
+
+            if (paciente.Edad >= 50 && paciente.Edad <= 69)
             {
                 return 4;
             }
-            else
-            {
-                return 5;
-            }
+
+            return 5;
         }
 
         //cardio:     +10 (5)
@@ -115,7 +125,7 @@ namespace Lab04_ED_2022.Delegados
 
         public static int prioridadEspecializacion(ModeloPaciente paciente)
         {
-            if (paciente.Especializacion.CompareTo("cardio") == 0)
+            if (paciente.Especializacion.CompareTo("cardio") == 0)//combobox / select-option
             {
                 return 5;
             }
