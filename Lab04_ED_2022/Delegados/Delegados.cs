@@ -9,9 +9,17 @@ namespace Lab04_ED_2022.Delegados
     public class Delegados
     {
         //Heapify!
-        public static int HeapifyDelegate(ModeloPaciente a, ModeloPaciente b) //arreglar mayúscula
+        public static int HeapifyDelegate(ModeloPaciente a, ModeloPaciente b) 
         {
-            return a.Prioridad > b.Prioridad ? 1 : -1;
+            if (a.Prioridad != b.Prioridad)
+            {
+                return a.Prioridad > b.Prioridad ? 1 : -1;
+            }
+            else
+            {
+                ExcepcionHora(a, b);
+                return HeapifyDelegate(a, b);
+            }
         }
 
         public static void SetPrioridad(ModeloPaciente paciente)
@@ -48,6 +56,8 @@ namespace Lab04_ED_2022.Delegados
 
         public static int PrioridadEdad(ModeloPaciente paciente)
         {
+            paciente.Edad = CalcularEdad(paciente);
+
             if (paciente.Edad >= 0 && paciente.Edad <= 5)
             {
                 return 8;
@@ -99,20 +109,23 @@ namespace Lab04_ED_2022.Delegados
             }
         }
 
-        public static void CalcularEdad(ModeloPaciente paciente)
+        public static int CalcularEdad(ModeloPaciente paciente)
         {
-            
+            DateTime acutal = DateTime.Now;
+            int edad = new DateTime(DateTime.Now.Subtract(paciente.FechaDeNacimiento).Ticks).Year - 1;
+
+            return edad;
         }
 
         public static void ExcepcionHora(ModeloPaciente a, ModeloPaciente b)
         {
             if (a.Hora > b.Hora)
             {
-                b.Prioridad += 1;
+                a.Prioridad += 1;
             }
             else
             {
-                a.Prioridad += 1;
+                b.Prioridad += 1;
             }
         }
     }
