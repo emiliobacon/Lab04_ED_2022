@@ -132,22 +132,22 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             Nodo<T> tray = new Nodo<T>(actual.Data);
 
             //siempre y cuando no estemos en la raiz 
-            while (actual.Padre != null)
+            if (actual.Padre != null)
             {
 
                 //si la prioridad del hijo es mayor a la del padre 
                 //hacer un swap de prioridad
-                if (HeapifyDelegate(actual.Data,actual.Padre.Data) == 1)
+                if (HeapifyDelegate(actual.Data, actual.Padre.Data) == 1)
                 {
 
                     //swap de prioridad usando la bandeja 
                     //para almacenar datos temporalmente
                     tray.Data = actual.Data;
-                   
+
                     actual.Data = actual.Padre.Data;
-                    
+
                     actual.Padre.Data = tray.Data;
-                    
+
                     //avanzar al padre del padre
                     Heapify(actual.Padre);
                 }
@@ -157,10 +157,12 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                     //avanzar al padre del padre
                     Heapify(actual.Padre);
                 }
-                
-            }
 
-            return;
+            }
+            else
+            {
+                return;
+            }
 
         }
 

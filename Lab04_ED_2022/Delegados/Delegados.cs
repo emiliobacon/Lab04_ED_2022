@@ -8,100 +8,54 @@ namespace Lab04_ED_2022.Delegados
 
     public class Delegados
     {
-
+        //Heapify!
         public static int HeapifyDelegate(ModeloPaciente a, ModeloPaciente b) //arreglar mayúscula
         {
             return a.Prioridad > b.Prioridad ? 1 : -1;
         }
-        public static void setPrioridad(ModeloPaciente paciente)
-        {
-            //          suma prioridad de acuerdo al genero
-            if (paciente.Genero.CompareTo("hombre") == 0)//radiobutton
-            {
-                //              hombre                
-                paciente.Prioridad += 3;
-            }
-            else if (paciente.Genero.CompareTo("mujer") == 0)
-            {
-                //              mujer                
-                paciente.Prioridad += 5;
-            }
 
-            if (paciente.Ingreso.CompareTo("ambulancia") == 0)
+        public static void SetPrioridad(ModeloPaciente paciente)
+        {
+            //suma prioridad de acuerdo al genero
+
+            //paciente.Género == false ? paciente.Prioridad += 3 : paciente.Prioridad += 5;
+            if (paciente.Género == true)
             {
-                //              ingreso ambulancia                 
                 paciente.Prioridad += 5;
             }
-            else if (paciente.Ingreso.CompareTo("asistido") == 0)
+            else
+                paciente.Prioridad += 3;
+
+            if (paciente.Ingreso == true)
             {
-                //              ingreso asistido
                 paciente.Prioridad += 3;
             }
+            else
+                paciente.Prioridad += 5;
 
             //          suma prioridad de acuerdo a la edad 
-            switch (prioridadEdad(paciente))
-            {
-                case 1:
-                    paciente.Prioridad += 8;
-                    break;
+            paciente.Prioridad += (PrioridadEdad(paciente));
 
-                case 2:
-                    paciente.Prioridad += 5;
-                    break;
-
-                case 3:
-                    paciente.Prioridad += 3;
-                    break;
-
-                case 4:
-                    paciente.Prioridad += 8;
-                    break;
-
-                case 5:
-                    paciente.Prioridad += 10;
-                    break;
-            }
             //          suma prioridad de acuerdo a la especializacion
-            switch (prioridadEspecializacion(paciente))
-            {
-                case 1:
-                    paciente.Prioridad += 3;
-                    break;
-                case 2:
-                    paciente.Prioridad += 5;
-                    break;
-                case 3:
-                    paciente.Prioridad += 8;
-                    break;
-                case 4:
-                    paciente.Prioridad += 8;
-                    break;
-                case 5:
-                    paciente.Prioridad += 10;
-                    break;
-                case 6:
-                    paciente.Prioridad += 0;
-                    break;
-            }
-
+            PrioridadEspecializacion(paciente);
         }
 
-        //70  +: +10 (5)
-        //50-69: +8  (4)
-        //18-49: +3  (3)
-        //6 -17: +5  (2)
-        //0 - 5: +8  (1)
+        //70  +: +10 
+        //50-69: +8  
+        //18-49: +3  
+        //6 -17: +5  
+        //0 - 5: +8  
 
-        public static int prioridadEdad(ModeloPaciente paciente)
+        public static int PrioridadEdad(ModeloPaciente paciente)
         {
             if (paciente.Edad >= 0 && paciente.Edad <= 5)
             {
-                return 1;
+                return 8;
             }
 
             if (paciente.Edad >= 6 && paciente.Edad <= 17)
             {
-                return 2;
+                return 5;
             }
 
             if (paciente.Edad >= 18 && paciente.Edad <= 49)
@@ -111,47 +65,46 @@ namespace Lab04_ED_2022.Delegados
 
             if (paciente.Edad >= 50 && paciente.Edad <= 69)
             {
-                return 4;
+                return 8;
             }
 
-            return 5;
+            return 10;
         }
 
-        //cardio:     +10 (5)
-        //neumo:      +8  (4)
-        //traumaexp:  +8  (3) 
-        //gine:       +5  (2)
-        //traumaint:  +3  (1)
+        //cardio:     +10 (1)
+        //neumo:      +8  (2)
+        //traumaexp:  +8  (3)
+        //gine:       +5  (4)
+        //traumaint:  +3  (5)
 
-        public static int prioridadEspecializacion(ModeloPaciente paciente)
+        public static void PrioridadEspecializacion(ModeloPaciente paciente)
         {
-            if (paciente.Especializacion.CompareTo("cardio") == 0)//combobox / select-option
+            switch (paciente.Especializacion)
             {
-                return 5;
-            }
-            else if (paciente.Especializacion.CompareTo("neumo") == 0)
-            {
-                return 4;
-            }
-            else if (paciente.Especializacion.CompareTo("traumaexp") == 0)
-            {
-                return 3;
-            }
-            else if (paciente.Especializacion.CompareTo("gine") == 0)
-            {
-                return 2;
-            }
-            else if (paciente.Especializacion.CompareTo("traumaint") == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return 6;
+                case 1:
+                    paciente.Prioridad += 10;
+                    break;
+                case 2:
+                    paciente.Prioridad += 8;
+                    break;
+                case 3:
+                    paciente.Prioridad += 8;
+                    break;
+                case 4:
+                    paciente.Prioridad += 5;
+                    break;
+                case 5:
+                    paciente.Prioridad += 3;
+                    break;
             }
         }
 
-        public static void excepcionHora(ModeloPaciente a, ModeloPaciente b)
+        public static void CalcularEdad(ModeloPaciente paciente)
+        {
+            
+        }
+
+        public static void ExcepcionHora(ModeloPaciente a, ModeloPaciente b)
         {
             if (a.Hora > b.Hora)
             {

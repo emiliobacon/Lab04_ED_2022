@@ -46,12 +46,10 @@ namespace Lab04_ED_2022.Controllers
                 {
                     Nombres = collection["Nombres"],
                     Apellidos = collection["Apellidos"],
-                    Genero = collection["Genero"],
-                    Edad = int.Parse(collection["Edad"]),
-                    Especializacion = collection["Especializacion"],
-                    Ingreso = collection["Ingreso"],
-                    Prioridad = int.Parse(collection["Prioridad"]),
-                    Hora = int.Parse(collection["Hora"]),
+                    Género = bool.Parse(collection["Género"]),
+                    Especializacion = int.Parse(collection["Especializacion"]),
+                    Ingreso = bool.Parse(collection["Ingreso"]),
+                    Hora = TimeSpan.Parse(collection["Hora"]),
                     FechaDeNacimiento = DateTime.Parse(collection["FechaDeNacimiento"]),
 
                 });

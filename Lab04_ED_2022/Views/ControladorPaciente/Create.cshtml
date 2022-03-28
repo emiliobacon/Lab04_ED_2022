@@ -4,68 +4,83 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Ingresar Nuevo Paciente</h1>
 
-<h4>ModeloPaciente</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Nombres" class="control-label"></label>
+                <b><label asp-for="Nombres" class="control-label"></label></b>
                 <input asp-for="Nombres" class="form-control" />
                 <span asp-validation-for="Nombres" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Apellidos" class="control-label"></label>
+                <b><label asp-for="Apellidos" class="control-label"></label></b>
                 <input asp-for="Apellidos" class="form-control" />
                 <span asp-validation-for="Apellidos" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Genero" class="control-label"></label>
-                <input asp-for="Genero" class="form-control" />
-                <span asp-validation-for="Genero" class="text-danger"></span>
+
+                <b>Género</b> <br />
+                @*Hombre<input type = "radio" name="género" value="false"/>
+            Mujer<input type = "radio" name = "género" value="true"/>*@
+                Hombre @Html.RadioButton("Género", false)
+                <br />
+                Mujer @Html.RadioButton("Género", true)
+
             </div>
             <div class="form-group">
-                <label asp-for="Edad" class="control-label"></label>
-                <input asp-for="Edad" class="form-control" />
-                <span asp-validation-for="Edad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Especializacion" class="control-label"></label>
-                <input asp-for="Especializacion" class="form-control" />
-                <span asp-validation-for="Especializacion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ingreso" class="control-label"></label>
-                <input asp-for="Ingreso" class="form-control" />
-                <span asp-validation-for="Ingreso" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Prioridad" class="control-label"></label>
-                <input asp-for="Prioridad" class="form-control" />
-                <span asp-validation-for="Prioridad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Hora" class="control-label"></label>
-                <input asp-for="Hora" class="form-control" />
-                <span asp-validation-for="Hora" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaDeNacimiento" class="control-label"></label>
+                <b>Fecha de Nacimiento</b>
                 <input asp-for="FechaDeNacimiento" class="form-control" />
                 <span asp-validation-for="FechaDeNacimiento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <b>Especialidad</b>
+                <br />
+                @*  Cardiología             <input type = "radio" name = "Especializacion" value="1"/>
+            Neumología              <input type = "radio" name = "Especializacion" value="2"/>
+            TraumatologíaExpuesta   <input type = "radio" name = "Especializacion" value="3"/>
+            Ginecología             <input type = "radio" name = "Especializacion" value="4"/>
+            TraumatologíaInterna    <input type = "radio" name = "Especializacion" value="5"/>
+                *@
+
+                -Cardiología @Html.RadioButton("Especializacion", 1)
+                <br />
+                -Neumología  @Html.RadioButton("Especializacion", 2)
+                <br />
+                -Ginecología  @Html.RadioButton("Especializacion", 4)
+                <br />
+                -Traumatología Interna  @Html.RadioButton("Especializacion", 5)
+                <br />
+                -Traumatología Expuesta  @Html.RadioButton("Especializacion", 3)
+            </div>
+            <div class="form-group">
+                <b>Forma de Ingreso</b>
+                <br />
+                @*Ambulancia<input type = "radio" name="Ingreso" value="false"/>
+            Asistido<input type = "radio" name = "Ingreso" value="true"/>*@
+                Ambulancia @Html.RadioButton("Ingreso", false)
+                <br />
+                Asistido @Html.RadioButton("Ingreso", true)
+            </div>
+            <div class="form-group">
+                <b>Hora de Ingreso</b>
+                <input asp-for="Hora" class="form-control" />
+                <span asp-validation-for="Hora" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Regresar</a>
 </div>
 
 @section Scripts {

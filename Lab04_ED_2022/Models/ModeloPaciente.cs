@@ -6,28 +6,26 @@ namespace Lab04_ED_2022.Models
 {
     public class ModeloPaciente
     {
-//      Nombre para mostrar al momento de visualizar pacientes
+        //Nombre para mostrar al momento de visualizar pacientes
         [Required]
         public string Nombres { get; set; }
-
         [Required]
         public string Apellidos { get; set; }
-        //      false hombre verdadero mujer
+        //false hombre, true mujer
         [Required]
-        public string Genero { get; set; }
-        
+        public bool Género { get; set; }
+       
         public int Edad { get; set; }
         [Required]
-        public string Especializacion { get; set; }
-//      falso ambulancia verdadero asistido
+        public int Especializacion { get; set; }
+//      falso ambulancia true asistido
         [Required]
-        public string Ingreso { get; set; }
-
+        public bool Ingreso { get; set; }
         public int Prioridad { get; set; }
 
-//      hora: 0000, 0010, 1400, 1350,
+
         [Required]
-        public int Hora { get; set; }
+        public TimeSpan Hora { get; set; }
 
         [Required]
         public DateTime FechaDeNacimiento { get; set; }
