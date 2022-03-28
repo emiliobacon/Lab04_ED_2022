@@ -137,6 +137,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
         }
      //clonar raiz para mostrar arbol 
+     //actualizado 
 
 
         private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
