@@ -121,11 +121,11 @@ namespace Lab04_ED_2022.Delegados
         {
             if (a.Hora > b.Hora)
             {
-                a.Prioridad += 1;
+                b.Prioridad += 1;
             }
             else
             {
-                b.Prioridad += 1;
+                a.Prioridad += 1;
             }
         }
     }
