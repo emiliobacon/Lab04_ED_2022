@@ -35,12 +35,11 @@ namespace Lab04_ED_2022.Models
             Data.Instance.miHeap.Insertar(paciente);
         }
 
-        
-        public TimeSpan SetEdad(ModeloPaciente a, ModeloPaciente b)
+        public static ModeloPaciente Atender()
         {
-            TimeSpan edad = a.FechaDeNacimiento - b.FechaDeNacimiento;
-            return edad;
+            return Data.Instance.miHeap.Elminar();
         }
+      
 
     }
 }

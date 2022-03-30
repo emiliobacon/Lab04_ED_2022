@@ -266,3 +266,4 @@ C:\Users\emili\Desktop\lab04\Lab04_ED_2022\Lab04_ED_2022\obj\Debug\netcoreapp3.1
 C:\Users\emili\Desktop\lab04\Lab04_ED_2022\Lab04_ED_2022\obj\Debug\netcoreapp3.1\Lab04_ED_2022.pdb
 C:\Users\emili\Desktop\lab04\Lab04_ED_2022\Lab04_ED_2022\obj\Debug\netcoreapp3.1\Lab04_ED_2022.genruntimeconfig.cache
 C:\Users\emili\Desktop\lab04\Lab04_ED_2022\Lab04_ED_2022\obj\Debug\netcoreapp3.1\Razor\Views\ControladorPaciente\Create.cshtml.g.cs
+C:\Users\emili\Desktop\lab04\Lab04_ED_2022\Lab04_ED_2022\obj\Debug\netcoreapp3.1\Razor\Views\ControladorPaciente\Atender.cshtml.g.cs

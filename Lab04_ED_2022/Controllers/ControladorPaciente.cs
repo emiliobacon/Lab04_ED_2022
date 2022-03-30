@@ -23,6 +23,8 @@ namespace Lab04_ED_2022.Controllers
             return View(Data.Instance.miHeap);
         }
 
+      
+
         // GET: ControladorPaciente/Details/5
         public ActionResult Details(int id)
         {
@@ -33,6 +35,11 @@ namespace Lab04_ED_2022.Controllers
         public ActionResult Create()
         {
             return View(new ModeloPaciente());
+        }
+
+        public ActionResult Atender()
+        {
+            return View(Models.ModeloPaciente.Atender());
         }
 
         // POST: ControladorPaciente/Create

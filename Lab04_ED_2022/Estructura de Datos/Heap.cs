@@ -10,14 +10,18 @@ namespace Lab04_ED_2022.Estructura_de_Datos
     {
         public Prioridad<T> compPrioridad { get; set; }
         public Comparar<T> HeapifyDelegate { get; set; }
+        public Comparar<T> CompararNodos { get; set; }
+
 
         int count = 0;
         int profundidad = 0;
 
         Nodo<T> raiz;
+        Nodo<T> último;
         public Heap()
         {
             this.raiz = null;
+            this.último = null;
         }
 
         private int Count()
@@ -123,6 +127,42 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         //clonar raiz para mostrar arbol 
         //actualizado 
 
+        public T Elminar()
+        {
+            return Eliminar(raiz);
+        }
+
+        private T Eliminar(Nodo<T> actual)
+        {
+            Nodo<T> remplazo = new Nodo<T>(actual.Data);
+
+            remplazo.Data = actual.Data;
+            último = NodoMasDerechoso(actual);
+
+            actual.Data = último.Data;
+
+            if (actual.Izquierda == null && actual.Derecha == null)
+            {
+                actual = null;
+                return remplazo.Data;
+            }
+            
+            if (CompararNodos(último.Data, último.Padre.Izquierda.Data) == 0)
+            {
+                último.Padre.Izquierda = null;
+                último.Padre = null;
+            }
+            else
+            {
+                último.Padre.Derecha = null;
+                último.Padre = null;
+            }
+
+            HeapifyInverso(actual);
+
+            return remplazo.Data;
+
+        }
         private void Heapify(Nodo<T> actual)
         {
             //nodo para almacenar temporalmente los datos 
@@ -163,18 +203,96 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
         }
 
-        private Nodo<T> EncontrarDerecha(Nodo<T> actual)
+        private void HeapifyInverso(Nodo<T> actual)
         {
-            if (actual.Derecha != null)
+            Nodo<T> tray = new Nodo<T>(actual.Data);
+
+            if (actual.Izquierda != null && actual.Derecha != null)
             {
-                return EncontrarDerecha(actual.Derecha);
+                if (HeapifyDelegate(actual.Izquierda.Data, actual.Derecha.Data) == 1)
+                {
+                    if (HeapifyDelegate(actual.Data, actual.Izquierda.Data) == -1)
+                    {
+                        tray.Data = actual.Data;
+
+                        actual.Data = actual.Izquierda.Data;
+
+                        actual.Izquierda.Data = tray.Data;
+
+                        HeapifyInverso(actual.Izquierda);
+                    }
+                    else
+                    {
+                        return;
+                    }
+
+                }
+                else
+                {
+                    if (HeapifyDelegate(actual.Data, actual.Derecha.Data) == -1)
+                    {
+                        tray.Data = actual.Data;
+
+                        actual.Data = actual.Derecha.Data;
+
+                        actual.Derecha.Data = tray.Data;
+
+                        HeapifyInverso(actual.Derecha);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
             }
             else
             {
-                return actual;
-            }
+                try
+                {
+                    if (HeapifyDelegate(actual.Izquierda.Data, actual.Data) == 1)
+                    {
+                        tray.Data = actual.Data;
+
+                        actual.Data = actual.Izquierda.Data;
+
+                        actual.Izquierda.Data = tray.Data;
+
+                        return;
+                    }
+                }
+                catch (Exception)
+                { 
+                    return;
+                }      
+            } 
         }
 
+        private int AlturaIzquierda(Nodo<T> nodo)
+        {
+            int c = 0;
+            while (nodo != null)
+            {
+                c++;
+                nodo = nodo.Izquierda;
+            }
+
+            return c; 
+        }
+
+        private Nodo<T> NodoMasDerechoso(Nodo<T> nodo)
+        {
+            int h = AlturaIzquierda(nodo);
+
+            if (h == 1)
+            {
+                return nodo;
+            }
+            else if ((h -1) == AlturaIzquierda(nodo.Derecha))
+            {
+                return NodoMasDerechoso(nodo.Derecha);
+            }        
+               return NodoMasDerechoso(nodo.Izquierda);
+        }
         private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
         {
 
@@ -182,7 +300,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             {
                 InOrder(padre.Izquierda, ref queue);
                 queue.Encolar(padre.Data);
-                InOrder(padre.Derecha, ref queue);
+                InOrder(padre.Derecha, ref queue);          
             }
             return;
         }

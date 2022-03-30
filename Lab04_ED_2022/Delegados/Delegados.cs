@@ -5,6 +5,7 @@ namespace Lab04_ED_2022.Delegados
 {
     public delegate void Prioridad<T>(T a);
     public delegate int Comparar<T>(T a, T b);
+    public delegate int CompararNodos<T>(T a, T b);
 
     public class Delegados
     {
@@ -20,6 +21,11 @@ namespace Lab04_ED_2022.Delegados
                 ExcepcionHora(a, b);
                 return HeapifyDelegate(a, b);
             }
+        }
+
+        public static int CompararNodos(ModeloPaciente a, ModeloPaciente b)
+        {
+            return a == b ? 0 : 1; 
         }
 
         public static void SetPrioridad(ModeloPaciente paciente)
