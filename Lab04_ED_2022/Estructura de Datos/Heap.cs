@@ -45,47 +45,40 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             }
             else
             {
-                insertInternal(raiz, nuevoNodo, 1);
+                InsertInternal(raiz, nuevoNodo, 1);
             }
         }
 
-        private void insertInternal(Nodo<T> padre, Nodo<T> newNode, int level)
+        private void InsertInternal(Nodo<T> padre, Nodo<T> newNode, int level)
         {
             int max_by_level = 1;
 
             for (int i = 1; i <= level; i++)
             {
                 max_by_level += Convert.ToInt32(Math.Pow(2, i));
-                if (profundidad < i)
+                if (profundidad < i) //saco la profundidad actual 
                 {
                     profundidad = i;
                 }
-
             }
 
             if (Count() < max_by_level)
-            {
+            {  //Puede ser insertado en este nivel
                 if (padre.Izquierda == null)
                 {
                     padre.Izquierda = newNode;
                     newNode.Padre = padre;
 
-                    //heapify
-
                     Heapify(newNode);
                 }
                 else
                 {
-
                     padre.Derecha = newNode;
                     newNode.Padre = padre;
 
-                    //heapify
-
                     Heapify(newNode);
-
                 }
-                count++;
+                count++; 
             }
             else
             {
@@ -95,14 +88,14 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                 {
                     raizActual = padre.Izquierda;
                 }
-                else if (padre.Derecha.Izquierda == null || padre.Derecha.Izquierda == null)
+                else if (padre.Derecha.Izquierda == null || padre.Derecha.Derecha == null)
                 {
                     raizActual = padre.Derecha;
                 }
                 else
                 {
                     int max_CantNodos_LastLevel = Convert.ToInt32(Math.Pow(2, profundidad));
-                    int variable_Selector = max_CantNodos_LastLevel / 2;
+                    int variable_Selector = max_CantNodos_LastLevel / Convert.ToInt32(Math.Pow(2, level));
                     int max_levelAll_before = 1;
                     for (int i = 1; i < profundidad; i++)
                     {
@@ -110,8 +103,10 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                     }
                     int cant_NodosLastLevel = Count() - max_levelAll_before;
 
+
                     if (cant_NodosLastLevel < variable_Selector || max_CantNodos_LastLevel == cant_NodosLastLevel)
                     {
+
                         raizActual = padre.Izquierda;
                     }
                     else
@@ -120,7 +115,9 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                     }
                 }
 
-                insertInternal(raizActual, newNode, level + 1);
+                InsertInternal(raizActual, newNode, level + 1);
+
+
             }
         }
         //clonar raiz para mostrar arbol 
@@ -164,6 +161,18 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                 return;
             }
 
+        }
+
+        private Nodo<T> EncontrarDerecha(Nodo<T> actual)
+        {
+            if (actual.Derecha != null)
+            {
+                return EncontrarDerecha(actual.Derecha);
+            }
+            else
+            {
+                return actual;
+            }
         }
 
         private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
