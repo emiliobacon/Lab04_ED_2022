@@ -53,7 +53,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             for (int i = 1; i <= level; i++)
             {
                 max_by_level += Convert.ToInt32(Math.Pow(2, i));
-                if (profundidad < i)
+                if (profundidad < i) //saco la profundidad actual 
                 {
                     profundidad = i;
                 }
@@ -61,7 +61,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             }
 
             if (Count() < max_by_level)
-            {  //Pede ser insertado en este nivel
+            {  //Puede ser insertado en este nivel
                 if (padre.Izquierda == null)
                 {
                     padre.Izquierda = newNode;
@@ -85,14 +85,14 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                 {
                     raizActual = padre.Izquierda;
                 }
-                else if (padre.Derecha.Izquierda == null || padre.Derecha.Izquierda == null)
+                else if (padre.Derecha.Izquierda == null || padre.Derecha.Derecha == null)
                 {
                     raizActual = padre.Derecha;
                 }
                 else
                 {
                     int max_CantNodos_LastLevel = Convert.ToInt32(Math.Pow(2, profundidad));
-                    int variable_Selector = max_CantNodos_LastLevel / 2;
+                    int variable_Selector = max_CantNodos_LastLevel / Convert.ToInt32(Math.Pow(2, level));
                     int max_levelAll_before = 1;
                     for (int i = 1; i < profundidad; i++)
                     {
@@ -100,9 +100,12 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                     }
                     int cant_NodosLastLevel = Count() - max_levelAll_before;
 
+
                     if (cant_NodosLastLevel < variable_Selector || max_CantNodos_LastLevel == cant_NodosLastLevel)
                     {
+
                         raizActual = padre.Izquierda;
+
                     }
                     else
                     {

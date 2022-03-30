@@ -39,9 +39,9 @@ namespace Lab04_ED_2022.Models
         }
 
         
-        public TimeSpan SetEdad(ModeloPaciente a, ModeloPaciente b)
+        public TimeSpan SetEdad(ModeloPaciente a)
         {
-            TimeSpan edad = a.FechaDeNacimiento - b.FechaDeNacimiento;
+            TimeSpan edad = a.FechaDeNacimiento - DateTime.Today;
             return edad;
         }
 
