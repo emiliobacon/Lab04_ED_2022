@@ -52,15 +52,10 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
         public Nodo<T> asignarPrioridad(Nodo<T> nodo)
         {
-            if (PrioridadVacia(nodo.Data) == 0)
-            {
+            
                 compPrioridad(nodo.Data);
                 return nodo;
-            }
-            else
-            {
-                return nodo;
-            }
+           
             
         }
 
@@ -326,7 +321,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         }
 
 
-        private void PreOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
+        private void Order(Nodo<T> padre, ref ColaRecorrido<T> queue)
         {
             //copia = raiz.DeepCopy();
 
@@ -334,8 +329,8 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             if (padre != null)
             {
                 queue.Encolar(padre.Data);
-                PreOrder(padre.Izquierda, ref queue);
-                PreOrder(padre.Derecha, ref queue);
+                Order(padre.Derecha, ref queue);
+                Order(padre.Izquierda, ref queue);
             }
             return;
         }
@@ -346,7 +341,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         {
             var queue = new ColaRecorrido<T>();
 
-            PreOrder(raiz, ref queue);
+            Order(raiz, ref queue);
 
             while (!queue.ColaVacia())
             {
