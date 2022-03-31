@@ -142,6 +142,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
         public T Elminar()
         {
+            count--;
             return Eliminar(raiz);
         }
 
@@ -153,6 +154,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             if (actual.Izquierda == null && actual.Derecha == null)
             {
                 actual.Data = default(T);
+               
                 
                 return remplazo.Data;
             }
