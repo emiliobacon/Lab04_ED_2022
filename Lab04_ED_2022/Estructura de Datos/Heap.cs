@@ -64,7 +64,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             Nodo<T> nuevoNodo = new Nodo<T>(data);
             asignarPrioridad(nuevoNodo);
 
-            if (raiz == null)//vaciar nodo
+            if (raiz == null || raiz.Data == null )//vaciar nodo
             {
                 raiz = nuevoNodo;
                 count++;
@@ -154,7 +154,6 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             {
                 actual.Data = default(T);
                 
-
                 return remplazo.Data;
             }
 
