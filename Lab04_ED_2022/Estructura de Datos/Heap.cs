@@ -11,7 +11,6 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         public Prioridad<T> compPrioridad { get; set; }
         public Comparar<T> HeapifyDelegate { get; set; }
         public Comparar<T> CompararNodos { get; set; }
-
         public Prioridad2<T> PrioridadVacia { get; set; }
 
         int count = 0;
@@ -19,7 +18,6 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
         Nodo<T> raiz;
 
-       
 
         Nodo<T> último;
         public Heap()
@@ -27,9 +25,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             this.raiz = null;
            
             this.último = null;
-        }
-
-         
+        }  
 
         private int Count()
         {
