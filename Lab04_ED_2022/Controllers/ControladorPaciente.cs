@@ -20,7 +20,7 @@ namespace Lab04_ED_2022.Controllers
         // GET: ControladorPaciente
         public ActionResult Index()
         {
-            return View(Data.Instance.miHeap);
+            return View(Data.Instance.HeapMostrar);
         }
 
       

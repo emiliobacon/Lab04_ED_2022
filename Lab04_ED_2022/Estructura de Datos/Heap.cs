@@ -17,12 +17,10 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         int profundidad = 0;
 
         Nodo<T> raiz;
-        Nodo<T> raiz2;
         Nodo<T> último;
         public Heap()
         {
-            this.raiz = null;
-            this.raiz2 = null;
+            this.raiz = null;        
             this.último = null;
         }
         private int Count()
@@ -301,31 +299,28 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             }        
                return NodoMasDerechoso(nodo.Izquierda);
         }
+
+
         private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
         { 
             while (padre.Data != null)
             { 
                queue.Encolar(Eliminar(padre));
-               
             }
             return;
         }
 
-       
-
+      
         public IEnumerator<T> GetEnumerator()
         {
-            
-
             var queue = new ColaRecorrido<T>();
 
-            InOrder(raiz2, ref queue);
+            InOrder(raiz, ref queue);
 
             while (!queue.ColaVacia())
             {
                 yield return queue.DesEncolar();
             }
-
         }
 
         IEnumerator IEnumerable.GetEnumerator()

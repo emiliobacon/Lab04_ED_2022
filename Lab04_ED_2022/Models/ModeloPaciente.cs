@@ -33,6 +33,7 @@ namespace Lab04_ED_2022.Models
         public static void Save(ModeloPaciente paciente)
         {
             Data.Instance.miHeap.Insertar(paciente);
+            
         }
 
         public static ModeloPaciente Atender()
