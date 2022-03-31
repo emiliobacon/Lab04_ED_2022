@@ -12,17 +12,25 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         public Comparar<T> HeapifyDelegate { get; set; }
         public Comparar<T> CompararNodos { get; set; }
 
+        public Prioridad2<T> PrioridadVacia { get; set; }
 
         int count = 0;
         int profundidad = 0;
 
         Nodo<T> raiz;
+
+        Nodo<T> copia;
+
         Nodo<T> último;
         public Heap()
         {
-            this.raiz = null;        
+            this.raiz = null;
+            this.copia = null;
             this.último = null;
         }
+
+         
+
         private int Count()
         {
             return count;
@@ -44,8 +52,16 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
         public Nodo<T> asignarPrioridad(Nodo<T> nodo)
         {
-            compPrioridad(nodo.Data);
-            return nodo;
+            if (PrioridadVacia(nodo.Data) == 0)
+            {
+                compPrioridad(nodo.Data);
+                return nodo;
+            }
+            else
+            {
+                return nodo;
+            }
+            
         }
 
         public void Insertar(T data)
@@ -53,7 +69,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             Nodo<T> nuevoNodo = new Nodo<T>(data);
             asignarPrioridad(nuevoNodo);
 
-            if (raiz == null)
+            if (raiz == null)//vaciar nodo
             {
                 raiz = nuevoNodo;
                 count++;
@@ -62,8 +78,9 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             else
             {
                 InsertInternal(raiz, nuevoNodo, 1);
-               
+                 
             }
+            
         }
 
         private void InsertInternal(Nodo<T> padre, Nodo<T> newNode, int level)
@@ -140,19 +157,21 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
             if (actual.Izquierda == null && actual.Derecha == null)
             {
-                actual.Data = default(T); 
+                actual.Data = default(T);
+                
+
                 return remplazo.Data;
             }
 
-           
+
 
             remplazo.Data = actual.Data;
             último = NodoMasDerechoso(actual);
 
             actual.Data = último.Data;
 
-            
-            
+
+
             if (CompararNodos(último.Data, último.Padre.Izquierda.Data) == 0)
             {
                 último.Padre.Izquierda = null;
@@ -164,7 +183,52 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                 último.Padre = null;
             }
 
+
+
             HeapifyInverso(actual);
+
+
+
+            return remplazo.Data;
+
+        }
+
+        private T Eliminar2(Nodo<T> actual)
+        {
+
+            Nodo<T> remplazo = new Nodo<T>(actual.Data);
+
+            if (actual.Izquierda == null && actual.Derecha == null)
+            {
+                actual.Data = default(T); 
+                return remplazo.Data;
+            }
+
+           
+
+            remplazo.Data = actual.Data;
+            último = NodoMasDerechoso(actual);
+
+            actual.Data = último.Data;
+
+
+
+            if (CompararNodos(último.Data, último.Padre.Izquierda.Data) == 0)
+            {
+                último.Padre.Izquierda = null;
+                último.Padre = null;
+            }
+            else
+            {
+                último.Padre.Derecha = null;
+                último.Padre = null;
+            }
+
+            
+
+            HeapifyInverso(actual);
+
+            
 
             return remplazo.Data;
 
@@ -302,15 +366,21 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
 
         private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
-        { 
-            while (padre.Data != null)
-            { 
-               queue.Encolar(Eliminar(padre));
+        {
+            //copia = raiz.DeepCopy();
+
+
+            if (padre != null)
+            {
+                queue.Encolar(padre.Data);
+                InOrder(padre.Izquierda, ref queue);
+                InOrder(padre.Derecha, ref queue);
             }
             return;
         }
 
-      
+        
+
         public IEnumerator<T> GetEnumerator()
         {
             var queue = new ColaRecorrido<T>();

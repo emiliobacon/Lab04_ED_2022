@@ -6,10 +6,7 @@
 
 <h1>Lista de Pacientes </h1>
 
-<header>
 
-    <a class="navbar-brand" asp-area="" asp-controller="ControladorPaciente" asp-action="Create">| Ingresar un nuevo paciente |</a> 
-</header>
 
 
 <table class="table">
@@ -21,18 +18,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Apellidos)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Género)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Edad)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Especializacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ingreso)
-            </th>
+           
+      
             <th>
                 @Html.DisplayNameFor(model => model.Prioridad)
             </th>
@@ -54,18 +45,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Apellidos)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Género)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Edad)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Especializacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ingreso)
-            </td>
+           
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Prioridad)
             </td>
@@ -75,11 +60,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.FechaDeNacimiento)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+          
         </tr>
 }
     </tbody>

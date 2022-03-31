@@ -26,14 +26,16 @@ namespace Lab04_ED_2022.Helpers
         {
             compPrioridad = Delegados.Delegados.SetPrioridad,
             HeapifyDelegate = Delegados.Delegados.HeapifyDelegate,
-            CompararNodos = Delegados.Delegados.CompararNodos
+            CompararNodos = Delegados.Delegados.CompararNodos,
+            PrioridadVacia = Delegados.Delegados.PrioridadVacia
         };
 
-        public Heap<ModeloPaciente> HeapMostrar = new Heap<ModeloPaciente>
+        public Heap<ModeloPaciente> miHeapMostrar = new Heap<ModeloPaciente>
         {
             compPrioridad = Delegados.Delegados.SetPrioridad,
             HeapifyDelegate = Delegados.Delegados.HeapifyDelegate,
-            CompararNodos = Delegados.Delegados.CompararNodos
+            CompararNodos = Delegados.Delegados.CompararNodos,
+            PrioridadVacia = Delegados.Delegados.PrioridadVacia
         };
     }
 }
