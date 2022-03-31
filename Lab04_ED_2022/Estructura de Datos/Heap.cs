@@ -17,16 +17,31 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         int profundidad = 0;
 
         Nodo<T> raiz;
+        Nodo<T> raiz2;
         Nodo<T> último;
         public Heap()
         {
             this.raiz = null;
+            this.raiz2 = null;
             this.último = null;
         }
-
         private int Count()
         {
             return count;
+        }
+
+        public static String DecimalBinario(int contador)
+        {
+            long Binario = 0;
+            int Divisor = 2;
+            long digito = 0;
+            for (int i = contador % Divisor, j = 0; contador > 0; contador /= Divisor, i = contador % Divisor, j++)
+            {
+                digito = i % Divisor;
+                Binario += digito * (long)Math.Pow(10, j);
+            }
+
+            return Convert.ToString(Binario);
         }
 
         public Nodo<T> asignarPrioridad(Nodo<T> nodo)
@@ -40,7 +55,6 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             Nodo<T> nuevoNodo = new Nodo<T>(data);
             asignarPrioridad(nuevoNodo);
 
-
             if (raiz == null)
             {
                 raiz = nuevoNodo;
@@ -50,20 +64,21 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             else
             {
                 InsertInternal(raiz, nuevoNodo, 1);
+               
             }
         }
 
         private void InsertInternal(Nodo<T> padre, Nodo<T> newNode, int level)
         {
-            int max_by_level = 1;
-
+            int max_by_level = 1; //Aquí es 1 porque no se ha modificado, no se ha desplazado.
             for (int i = 1; i <= level; i++)
             {
                 max_by_level += Convert.ToInt32(Math.Pow(2, i));
-                if (profundidad < i) //saco la profundidad actual 
-                {
+                if (profundidad < i)
+                { //Sacamos la profundidad actual
                     profundidad = i;
                 }
+
             }
 
             if (Count() < max_by_level)
@@ -85,7 +100,8 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                 count++; 
             }
             else
-            {
+            { //Este else es la representación del desplazamiento.
+              
                 Nodo<T> raizActual = new Nodo<T>(padre.Data);
 
                 if (padre.Izquierda.Izquierda == null || padre.Izquierda.Derecha == null)
@@ -98,19 +114,9 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                 }
                 else
                 {
-                    int max_CantNodos_LastLevel = Convert.ToInt32(Math.Pow(2, profundidad));
-                    int variable_Selector = max_CantNodos_LastLevel / Convert.ToInt32(Math.Pow(2, level));
-                    int max_levelAll_before = 1;
-                    for (int i = 1; i < profundidad; i++)
+                    String binario = DecimalBinario(Count() + 1);
+                    if (binario.Substring(level, level + 1).Equals("0"))
                     {
-                        max_levelAll_before += Convert.ToInt32(Math.Pow(2, i));
-                    }
-                    int cant_NodosLastLevel = Count() - max_levelAll_before;
-
-
-                    if (cant_NodosLastLevel < variable_Selector || max_CantNodos_LastLevel == cant_NodosLastLevel)
-                    {
-
                         raizActual = padre.Izquierda;
                     }
                     else
@@ -120,12 +126,9 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                 }
 
                 InsertInternal(raizActual, newNode, level + 1);
-
-
             }
         }
-        //clonar raiz para mostrar arbol 
-        //actualizado 
+     
 
         public T Elminar()
         {
@@ -134,18 +137,23 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
         private T Eliminar(Nodo<T> actual)
         {
+
             Nodo<T> remplazo = new Nodo<T>(actual.Data);
+
+            if (actual.Izquierda == null && actual.Derecha == null)
+            {
+                actual.Data = default(T); 
+                return remplazo.Data;
+            }
+
+           
 
             remplazo.Data = actual.Data;
             último = NodoMasDerechoso(actual);
 
             actual.Data = último.Data;
 
-            if (actual.Izquierda == null && actual.Derecha == null)
-            {
-                actual = null;
-                return remplazo.Data;
-            }
+            
             
             if (CompararNodos(último.Data, último.Padre.Izquierda.Data) == 0)
             {
@@ -247,7 +255,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             }
             else
             {
-                try
+                if (actual.Izquierda != null)
                 {
                     if (HeapifyDelegate(actual.Izquierda.Data, actual.Data) == 1)
                     {
@@ -260,10 +268,10 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                         return;
                     }
                 }
-                catch (Exception)
-                { 
+                
+                
                     return;
-                }      
+                
             } 
         }
 
@@ -294,21 +302,24 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                return NodoMasDerechoso(nodo.Izquierda);
         }
         private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
-        {
-
-            if (padre != null)
-            {
-                InOrder(padre.Izquierda, ref queue);
-                queue.Encolar(padre.Data);
-                InOrder(padre.Derecha, ref queue);          
+        { 
+            while (padre.Data != null)
+            { 
+               queue.Encolar(Eliminar(padre));
+               
             }
             return;
         }
 
+       
+
         public IEnumerator<T> GetEnumerator()
         {
+            
+
             var queue = new ColaRecorrido<T>();
-            InOrder(raiz, ref queue);
+
+            InOrder(raiz2, ref queue);
 
             while (!queue.ColaVacia())
             {

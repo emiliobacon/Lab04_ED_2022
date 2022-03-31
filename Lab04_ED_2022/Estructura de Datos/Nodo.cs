@@ -7,16 +7,18 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 {
     public class Nodo<T>
     {
-        public T Data;
-        
-        public Nodo<T> Izquierda;
-        public Nodo<T> Derecha;
-        public Nodo<T> Padre;
+        public T Data { get; set; }
+
+        public Nodo<T> Izquierda { get; set; }
+        public Nodo<T> Derecha { get; set; }
+        public Nodo<T> Padre { get; set; }
 
         public Nodo(T data)
         {
             this.Data = data;
         }
+
+        
     }
 }
 

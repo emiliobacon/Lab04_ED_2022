@@ -60,6 +60,7 @@ namespace Lab04_ED_2022.Controllers
                     FechaDeNacimiento = DateTime.Parse(collection["FechaDeNacimiento"]),
 
                 });
+
                 return RedirectToAction(nameof(Index));
             }
             catch
