@@ -4,6 +4,7 @@ using Lab04_ED_2022.Models;
 namespace Lab04_ED_2022.Delegados
 {
     public delegate void Prioridad<T>(T a);
+    public delegate int Prioridad2<T>(T a);
     public delegate int Comparar<T>(T a, T b);
     public delegate int CompararNodos<T>(T a, T b);
 
@@ -26,6 +27,10 @@ namespace Lab04_ED_2022.Delegados
         public static int CompararNodos(ModeloPaciente a, ModeloPaciente b)
         {
             return a == b ? 0 : 1; 
+        }
+        public static int PrioridadVacia(ModeloPaciente a)
+        {
+            return a.Prioridad == 0 ? 0 : 1;
         }
 
         public static void SetPrioridad(ModeloPaciente paciente)

@@ -16,9 +16,23 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         public Nodo(T data)
         {
             this.Data = data;
+
         }
 
-        
+       
+
+
+        public Nodo<T> DeepCopy()
+        {
+            Nodo<T> DeepCopyNodo = new Nodo<T>(this.Data);
+
+            DeepCopyNodo.Izquierda = this.Izquierda;
+            DeepCopyNodo.Derecha = this.Derecha;
+            DeepCopyNodo.Padre = this.Padre;
+
+            return DeepCopyNodo;
+        }
+
     }
 }
 
