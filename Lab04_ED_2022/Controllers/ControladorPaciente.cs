@@ -20,7 +20,7 @@ namespace Lab04_ED_2022.Controllers
         // GET: ControladorPaciente
         public ActionResult Index()
         {
-            return View(Data.Instance.miHeapMostrar);
+            return View(Data.Instance.miHeap);
         }
 
       
@@ -61,7 +61,7 @@ namespace Lab04_ED_2022.Controllers
 
                 });
 
-                return RedirectToAction(/*nameof(Index)*/);
+                return RedirectToAction(nameof(Index));
             }
             catch
             {

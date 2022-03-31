@@ -4,9 +4,9 @@
     ViewData["Title"] = "Atender";
 }
 
-<h1>Atender</h1>
+<h1>Siguiente Paciente</h1>
 
-<h4>ModeloPaciente</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -22,26 +22,14 @@
                 <input asp-for="Apellidos" class="form-control" />
                 <span asp-validation-for="Apellidos" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Género" /> @Html.DisplayNameFor(model => model.Género)
-                </label>
-            </div>
+           
             <div class="form-group">
                 <label asp-for="Edad" class="control-label"></label>
                 <input asp-for="Edad" class="form-control" />
                 <span asp-validation-for="Edad" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Especializacion" class="control-label"></label>
-                <input asp-for="Especializacion" class="form-control" />
-                <span asp-validation-for="Especializacion" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Ingreso" /> @Html.DisplayNameFor(model => model.Ingreso)
-                </label>
-            </div>
+         
+      
             <div class="form-group">
                 <label asp-for="Prioridad" class="control-label"></label>
                 <input asp-for="Prioridad" class="form-control" />
@@ -57,16 +45,12 @@
                 <input asp-for="FechaDeNacimiento" class="form-control" />
                 <span asp-validation-for="FechaDeNacimiento" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+           
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

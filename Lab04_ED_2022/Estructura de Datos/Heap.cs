@@ -69,7 +69,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             Nodo<T> nuevoNodo = new Nodo<T>(data);
             asignarPrioridad(nuevoNodo);
 
-            if (raiz == null)
+            if (raiz == null)//vaciar nodo
             {
                 raiz = nuevoNodo;
                 count++;
@@ -158,6 +158,8 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             if (actual.Izquierda == null && actual.Derecha == null)
             {
                 actual.Data = default(T);
+                
+
                 return remplazo.Data;
             }
 
@@ -367,9 +369,12 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         {
             //copia = raiz.DeepCopy();
 
-            while (padre.Data != null)
-            { 
-               queue.Encolar(Eliminar(padre));
+
+            if (padre != null)
+            {
+                queue.Encolar(padre.Data);
+                InOrder(padre.Izquierda, ref queue);
+                InOrder(padre.Derecha, ref queue);
             }
             return;
         }
@@ -379,8 +384,6 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         public IEnumerator<T> GetEnumerator()
         {
             var queue = new ColaRecorrido<T>();
-
-           
 
             InOrder(raiz, ref queue);
 
