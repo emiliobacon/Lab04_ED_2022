@@ -19,13 +19,13 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
         Nodo<T> raiz;
 
-        Nodo<T> copia;
+       
 
         Nodo<T> último;
         public Heap()
         {
             this.raiz = null;
-            this.copia = null;
+           
             this.último = null;
         }
 
@@ -52,15 +52,10 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
         public Nodo<T> asignarPrioridad(Nodo<T> nodo)
         {
-            if (PrioridadVacia(nodo.Data) == 0)
-            {
+            
                 compPrioridad(nodo.Data);
                 return nodo;
-            }
-            else
-            {
-                return nodo;
-            }
+           
             
         }
 
@@ -193,46 +188,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
         }
 
-        private T Eliminar2(Nodo<T> actual)
-        {
-
-            Nodo<T> remplazo = new Nodo<T>(actual.Data);
-
-            if (actual.Izquierda == null && actual.Derecha == null)
-            {
-                actual.Data = default(T); 
-                return remplazo.Data;
-            }
-
-           
-
-            remplazo.Data = actual.Data;
-            último = NodoMasDerechoso(actual);
-
-            actual.Data = último.Data;
-
-
-
-            if (CompararNodos(último.Data, último.Padre.Izquierda.Data) == 0)
-            {
-                último.Padre.Izquierda = null;
-                último.Padre = null;
-            }
-            else
-            {
-                último.Padre.Derecha = null;
-                último.Padre = null;
-            }
-
-            
-
-            HeapifyInverso(actual);
-
-            
-
-            return remplazo.Data;
-
-        }
+        
         private void Heapify(Nodo<T> actual)
         {
             //nodo para almacenar temporalmente los datos 
@@ -365,7 +321,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         }
 
 
-        private void InOrder(Nodo<T> padre, ref ColaRecorrido<T> queue)
+        private void Order(Nodo<T> padre, ref ColaRecorrido<T> queue)
         {
             //copia = raiz.DeepCopy();
 
@@ -373,8 +329,8 @@ namespace Lab04_ED_2022.Estructura_de_Datos
             if (padre != null)
             {
                 queue.Encolar(padre.Data);
-                InOrder(padre.Izquierda, ref queue);
-                InOrder(padre.Derecha, ref queue);
+                Order(padre.Derecha, ref queue);
+                Order(padre.Izquierda, ref queue);
             }
             return;
         }
@@ -385,7 +341,7 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         {
             var queue = new ColaRecorrido<T>();
 
-            InOrder(raiz, ref queue);
+            Order(raiz, ref queue);
 
             while (!queue.ColaVacia())
             {
