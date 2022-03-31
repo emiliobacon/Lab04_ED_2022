@@ -22,7 +22,19 @@ namespace Lab04_ED_2022.Estructura_de_Datos
         {
             return count;
         }
+        public static String DecimalBinario(int contador)
+        {
+            long Binario = 0;
+            int Divisor = 2;
+            long digito = 0;
+            for (int i = contador % Divisor, j = 0; contador > 0; contador /= Divisor, i = contador % Divisor, j++)
+            {
+                digito = i % Divisor;
+                Binario += digito * (long)Math.Pow(10, j);
+            }
 
+            return Convert.ToString(Binario);
+        }
         public Nodo<T> asignarPrioridad(Nodo<T> nodo)
         {
             nodo.Prioridad = compPrioridad(nodo.Data);
@@ -48,13 +60,12 @@ namespace Lab04_ED_2022.Estructura_de_Datos
 
         private void insertInternal(Nodo<T> padre, Nodo<T> newNode, int level)
         {
-            int max_by_level = 1;
-
+            int max_by_level = 1; //Aquí es 1 porque no se ha modificado, no se ha desplazado.
             for (int i = 1; i <= level; i++)
             {
                 max_by_level += Convert.ToInt32(Math.Pow(2, i));
-                if (profundidad < i) //saco la profundidad actual 
-                {
+                if (profundidad < i)
+                { //Sacamos la profundidad actual
                     profundidad = i;
                 }
 
@@ -75,8 +86,8 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                 //@pending: Comaparamos a verificar si es necesario cambiar el contenido del nodo
             }
             else
-            {
-                //@pending: Buscar en el siguiente nivel pero enviarle como parametro el padre que puede tenerlo
+            { //Este else es la representación del desplazamiento.
+              //@pending: Buscar en el siguiente nivel pero enviarle como parametro el padre que puede tenerlo
 
 
                 Nodo<T> raizActual = new Nodo<T>(padre.Data);
@@ -91,21 +102,10 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                 }
                 else
                 {
-                    int max_CantNodos_LastLevel = Convert.ToInt32(Math.Pow(2, profundidad));
-                    int variable_Selector = max_CantNodos_LastLevel / Convert.ToInt32(Math.Pow(2, level));
-                    int max_levelAll_before = 1;
-                    for (int i = 1; i < profundidad; i++)
+                    String binario = DecimalBinario(Count() + 1);
+                    if (binario.Substring(level, level + 1).Equals("0"))
                     {
-                        max_levelAll_before += Convert.ToInt32(Math.Pow(2, i));
-                    }
-                    int cant_NodosLastLevel = Count() - max_levelAll_before;
-
-
-                    if (cant_NodosLastLevel < variable_Selector || max_CantNodos_LastLevel == cant_NodosLastLevel)
-                    {
-
                         raizActual = padre.Izquierda;
-
                     }
                     else
                     {
@@ -114,8 +114,6 @@ namespace Lab04_ED_2022.Estructura_de_Datos
                 }
 
                 insertInternal(raizActual, newNode, level + 1);
-
-
             }
 
         }
